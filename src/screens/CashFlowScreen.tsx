@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { CashFlowTable } from '../components/CashFlowTable';
+import theme from '../styles/theme';
 
 export const CashFlowScreen = ({ route }: any) => {
   const { schedule } = route.params;
@@ -14,11 +15,11 @@ export const CashFlowScreen = ({ route }: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#121212',
+    ...theme.layout.container,
+    backgroundColor: theme.colors.backgroundColor,
   },
   content: {
-    padding: 16,
+    padding: theme.padding.horizontalScreen,
     paddingBottom: 40,
   }
 });

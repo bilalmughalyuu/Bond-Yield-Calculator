@@ -71,35 +71,28 @@ export const BondInputForm: React.FC<Props> = ({ inputs, onInputChange }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#1E1E1E',
-    padding: 20,
-    borderRadius: 16,
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 8,
+    backgroundColor: theme.colors.cardColor,
+    padding: theme.padding.large,
+    borderRadius: theme.cardBorderRadius,
+    ...theme.layout.shadowBox,
   },
   header: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#FFF',
+    ...theme.layout.heading,
     marginBottom: 16,
   },
   label: {
-    color: '#A0A0A0',
-    fontSize: 14,
+    ...theme.layout.subtitle,
+    color: theme.colors.grayColor,
     marginBottom: 8,
   },
   input: {
-    backgroundColor: '#2A2A2A',
-    color: '#FFF',
+    backgroundColor: theme.colors.surfaceColor,
+    color: theme.colors.textColor,
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: theme.colors.borderColor,
   },
   switchGroup: {
     marginTop: 8,
@@ -110,10 +103,10 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   activeText: {
-    color: '#FFF',
+    color: theme.colors.primaryColor,
     fontWeight: '600',
   },
   inactiveText: {
-    color: '#666',
+    color: theme.colors.grayColor,
   }
 });

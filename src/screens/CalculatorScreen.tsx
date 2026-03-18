@@ -3,9 +3,14 @@ import { ScrollView, StyleSheet, Text, KeyboardAvoidingView, Platform, View, Tou
 import { BondInputForm } from '../components/BondInputForm';
 import { ResultsSummary } from '../components/ResultsSummary';
 import { BondInputs, calculateBondMetrics, generateCashFlowSchedule } from '../utils/finance';
-import { CashFlowTable } from '../components/CashFlowTable';
+import theme from '../styles/theme';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import HeightGap from '../components/HeightGap';
 
 export const CalculatorScreen = ({ navigation }: any) => {
+
+  const padding = useSafeAreaInsets();
+
   const [inputs, setInputs] = useState<BondInputs>({
     faceValue: 1000,
     couponRate: 5,
@@ -27,23 +32,26 @@ export const CalculatorScreen = ({ navigation }: any) => {
       style={styles.keyboardAvoidingView}
     >
       <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
-        <View style={styles.headerContainer}>
+        <View style={[styles.headerContainer, { paddingTop: padding.top }]}>
           <Text style={styles.title}>Bond Yield</Text>
           <Text style={styles.subtitle}>Calculator</Text>
         </View>
 
+        <HeightGap height={12} />
+
         <BondInputForm inputs={inputs} onInputChange={handleInputChange} />
+
+        <HeightGap height={20} />
 
         <ResultsSummary metrics={metrics} />
 
-        {/* <CashFlowTable schedule={schedule} /> */}
-
+        <HeightGap height={20} />
 
         <TouchableOpacity
           style={styles.viewScheduleButton}
           onPress={() => navigation.navigate('CashFlow', { schedule })}
         >
-          <Text style={styles.viewScheduleButtonText}>View Cash Flow Schedule</Text>
+          <Text style={theme.layout.normalText}>View Cash Flow Schedule</Text>
         </TouchableOpacity>
 
       </ScrollView>
@@ -53,41 +61,34 @@ export const CalculatorScreen = ({ navigation }: any) => {
 
 const styles = StyleSheet.create({
   keyboardAvoidingView: {
-    flex: 1,
-    backgroundColor: '#121212',
+    ...theme.layout.container,
+    backgroundColor: theme.colors.backgroundColor,
   },
   headerContainer: {
-    paddingVertical: 24,
-    alignItems: 'center',
-    paddingTop: Platform.OS === 'ios' ? 60 : 24,
+    ...theme.layout.center,
   },
   title: {
     fontSize: 32,
     fontWeight: '800',
-    color: '#FFFFFF',
+    color: theme.colors.primaryColor,
     letterSpacing: 1,
   },
   subtitle: {
     fontSize: 24,
     fontWeight: '300',
-    color: '#4CAF50',
+    color: theme.colors.secondaryColor,
     marginTop: -4,
   },
   scrollContent: {
-    padding: 16,
+    padding: theme.padding.horizontalScreen,
   },
   viewScheduleButton: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: theme.colors.primaryColor,
     paddingVertical: 14,
     borderRadius: 8,
     alignItems: 'center',
     marginHorizontal: 12,
     marginTop: 16,
     marginBottom: 24,
-  },
-  viewScheduleButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
   },
 });

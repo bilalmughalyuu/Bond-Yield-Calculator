@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { BondMetrics } from '../utils/finance';
+import theme from '../styles/theme';
+import HeightGap from './HeightGap';
 
 interface Props {
   metrics: BondMetrics;
@@ -9,16 +11,18 @@ interface Props {
 export const ResultsSummary: React.FC<Props> = ({ metrics }) => {
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Premium': return '#4CAF50';
-      case 'Discount': return '#F44336';
-      default: return '#2196F3';
+      case 'Premium': return theme.colors.brightGreen;
+      case 'Discount': return theme.colors.brightRed;
+      default: return theme.colors.primaryColor;
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Summary</Text>
-      
+      <Text style={theme.layout.heading}>Summary</Text>
+
+      <HeightGap height={16} />
+
       <View style={styles.row}>
         <View style={styles.card}>
           <Text style={styles.label}>Current Yield</Text>
@@ -29,6 +33,8 @@ export const ResultsSummary: React.FC<Props> = ({ metrics }) => {
           <Text style={styles.value}>{metrics.ytm.toFixed(2)}%</Text>
         </View>
       </View>
+
+      <HeightGap height={16} />
 
       <View style={styles.row}>
         <View style={styles.card}>
@@ -42,45 +48,40 @@ export const ResultsSummary: React.FC<Props> = ({ metrics }) => {
           </Text>
         </View>
       </View>
+
+      <HeightGap height={16} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#1E1E1E',
-    padding: 20,
-    borderRadius: 16,
-    marginBottom: 20,
-  },
-  header: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#FFF',
-    marginBottom: 16,
+    backgroundColor: theme.colors.cardColor,
+    padding: theme.padding.large,
+    borderRadius: theme.cardBorderRadius,
+    ...theme.layout.shadowBox,
   },
   row: {
-    flexDirection: 'row',
+    ...theme.layout.row,
     justifyContent: 'space-between',
-    marginBottom: 16,
     gap: 12,
   },
   card: {
-    flex: 1,
-    backgroundColor: '#2A2A2A',
-    padding: 16,
-    borderRadius: 12,
+    ...theme.layout.container,
+    backgroundColor: theme.colors.surfaceColor,
+    padding: theme.padding.horizontalScreen,
+    borderRadius: theme.cardBorderRadius,
     alignItems: 'center',
   },
   label: {
-    color: '#A0A0A0',
+    color: theme.colors.grayColor,
     fontSize: 12,
     marginBottom: 4,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   value: {
-    color: '#FFF',
+    color: theme.colors.headingColor,
     fontSize: 18,
     fontWeight: 'bold',
   }

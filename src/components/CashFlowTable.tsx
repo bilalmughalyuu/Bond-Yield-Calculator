@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { CashFlowRow } from '../utils/finance';
+import theme from '../styles/theme';
 
 interface Props {
   schedule: CashFlowRow[];
@@ -38,38 +39,37 @@ export const CashFlowTable: React.FC<Props> = ({ schedule }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#1E1E1E',
-    padding: 20,
-    borderRadius: 16,
+    backgroundColor: theme.colors.cardColor,
+    padding: theme.padding.large,
+    borderRadius: theme.cardBorderRadius,
     marginBottom: 40,
+    ...theme.layout.shadowBox,
   },
   header: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#FFF',
+    ...theme.layout.heading,
     marginBottom: 16,
   },
   tableHeader: {
-    flexDirection: 'row',
+    ...theme.layout.row,
     borderBottomWidth: 1,
-    borderBottomColor: '#444',
+    borderBottomColor: theme.colors.borderColor,
     paddingBottom: 12,
     marginBottom: 8,
   },
   tableRow: {
-    flexDirection: 'row',
+    ...theme.layout.row,
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#2A2A2A',
+    borderBottomColor: theme.colors.lightGray,
   },
   cell: {
-    color: '#CCC',
+    color: theme.colors.textColor,
     fontSize: 14,
     textAlign: 'right',
     paddingRight: 12,
   },
   headerCell: {
-    color: '#888',
+    color: theme.colors.grayColor,
     fontWeight: 'bold',
     textTransform: 'uppercase',
     fontSize: 12,

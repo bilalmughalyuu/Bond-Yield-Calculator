@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { ScrollView, StyleSheet, Text, KeyboardAvoidingView, Platform, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, KeyboardAvoidingView, Platform, View, TouchableOpacity } from 'react-native';
 import { BondInputForm } from '../components/BondInputForm';
 import { ResultsSummary } from '../components/ResultsSummary';
-import { CashFlowTable } from '../components/CashFlowTable';
 import { BondInputs, calculateBondMetrics, generateCashFlowSchedule } from '../utils/finance';
+import { CashFlowTable } from '../components/CashFlowTable';
 
-export const CalculatorScreen = () => {
+export const CalculatorScreen = ({ navigation }: any) => {
   const [inputs, setInputs] = useState<BondInputs>({
     faceValue: 1000,
     couponRate: 5,
@@ -36,7 +36,15 @@ export const CalculatorScreen = () => {
 
         <ResultsSummary metrics={metrics} />
 
-        <CashFlowTable schedule={schedule} />
+        {/* <CashFlowTable schedule={schedule} /> */}
+
+
+        <TouchableOpacity
+          style={styles.viewScheduleButton}
+          onPress={() => navigation.navigate('CashFlow', { schedule })}
+        >
+          <Text style={styles.viewScheduleButtonText}>View Cash Flow Schedule</Text>
+        </TouchableOpacity>
 
       </ScrollView>
     </KeyboardAvoidingView>
@@ -46,10 +54,12 @@ export const CalculatorScreen = () => {
 const styles = StyleSheet.create({
   keyboardAvoidingView: {
     flex: 1,
+    backgroundColor: '#121212',
   },
   headerContainer: {
     paddingVertical: 24,
     alignItems: 'center',
+    paddingTop: Platform.OS === 'ios' ? 60 : 24,
   },
   title: {
     fontSize: 32,
@@ -65,5 +75,19 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 16,
-  }
+  },
+  viewScheduleButton: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginHorizontal: 12,
+    marginTop: 16,
+    marginBottom: 24,
+  },
+  viewScheduleButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
 });

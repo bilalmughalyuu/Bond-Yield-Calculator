@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet, Switch } from 'react-native';
 import { BondInputs } from '../utils/finance';
 import HeightGap from './HeightGap';
+import theme from '../styles/theme';
 
 interface Props {
   inputs: BondInputs;
@@ -104,8 +105,8 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    ...theme.layout.row,
+    ...theme.layout.crossAxisAlignment,
     gap: 12,
   },
   activeText: {
